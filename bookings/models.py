@@ -31,3 +31,11 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.car}'
+    
+from decimal import Decimal
+
+def total_days(self):
+    return (self.end_date - self.start_date).days + 1
+
+def total_price(self):
+    return Decimal(self.total_days()) * self.car.price_per_day

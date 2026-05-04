@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/cars/', include('cars.urls')),
     path('api/users/', include('users.urls')),
     path('api/bookings/', include('bookings.urls')),
+    path('api/payments/', include('payments.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(
