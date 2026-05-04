@@ -9,6 +9,7 @@ class BookingSerializer(serializers.ModelSerializer):
     )
 
     car_name = serializers.SerializerMethodField()
+    payment_status = serializers.SerializerMethodField()
 
     class Meta:
         model = Booking
@@ -20,7 +21,14 @@ class BookingSerializer(serializers.ModelSerializer):
             'end_date',
             'status',
             'status_display',
+            'payment_status',
         ]
 
     def get_car_name(self, obj):
         return f"{obj.car.brand} {obj.car.model}"
+
+    def get_payment_status(self, obj):
+        payment = getattr(obj, 'payment', None)
+        if not payment:
+            return None
+        return payment.status

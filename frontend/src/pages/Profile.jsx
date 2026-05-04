@@ -19,6 +19,12 @@ function Profile() {
     cancelled: 'text-red-400',
   }
 
+  const paymentStyles = {
+    pending: 'text-yellow-400',
+    succeeded: 'text-green-400',
+    canceled: 'text-red-400',
+  }
+
   useEffect(() => {
     Promise.all([
       api.get('/users/profile/'),
@@ -50,6 +56,30 @@ function Profile() {
       })
       .catch(err => {
         setMessage(err.response?.data?.error || 'Ошибка смены пароля')
+      })
+  }
+
+  const startPayment = (bookingId) => {
+    api.post(`/payments/${bookingId}/create/`)
+      .then(res => {
+        window.location.href = res.data.confirmation_url
+      })
+      .catch(err => {
+        setMessage(err.response?.data?.detail || 'Не удалось создать оплату')
+      })
+  }
+
+  const refreshPaymentStatus = (bookingId) => {
+    api.get(`/payments/${bookingId}/status/`)
+      .then(res => {
+        setBookings(prev => prev.map(b => (
+          b.id === bookingId
+            ? { ...b, payment_status: res.data.status }
+            : b
+        )))
+      })
+      .catch(() => {
+        setMessage('Не удалось обновить статус оплаты')
       })
   }
 
@@ -95,6 +125,28 @@ function Profile() {
                     <span className={`font-medium ${statusStyles[b.status]}`}>
                       {b.status_display}
                     </span>
+                  </div>
+
+                  <div className="mt-1">
+                    Оплата:{' '}
+                    <span className={`font-medium ${paymentStyles[b.payment_status] || 'text-[#9ca3af]'}`}>
+                      {b.payment_status || 'не создана'}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 flex gap-2">
+                    <button
+                      onClick={() => startPayment(b.id)}
+                      className="bg-[#374151] hover:bg-[#4b5563] transition px-3 py-2 rounded text-xs"
+                    >
+                      Оплатить
+                    </button>
+                    <button
+                      onClick={() => refreshPaymentStatus(b.id)}
+                      className="bg-[#1f2937] hover:bg-[#374151] transition px-3 py-2 rounded text-xs"
+                    >
+                      Обновить статус
+                    </button>
                   </div>
                 </div>
               ))}
