@@ -33,20 +33,6 @@ class CarListView(APIView):
         if max_price:
             cars = cars.filter(price_per_day__lte=max_price)
 
-        status = request.GET.get('status')
-        if status:
-            cars = cars.filter(status=status)
-
-        sort = request.GET.get('sort')
-        sort_mapping = {
-            'price_asc': 'price_per_day',
-            'price_desc': '-price_per_day',
-            'year_asc': 'year',
-            'year_desc': '-year',
-        }
-        if sort in sort_mapping:
-            cars = cars.order_by(sort_mapping[sort])
-
         serializer = CarSerializer(cars, many=True)
         return Response(serializer.data)
 

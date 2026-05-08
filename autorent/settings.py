@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
     'bookings',
     'rest_framework',
     'corsheaders',
-    'payments',
 
 
 ]
@@ -162,8 +160,3 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
-YOOKASSA_SHOP_ID = "1312480"
-YOOKASSA_SECRET_KEY = "test_APZvmntHILqf37dvE2iwDvN6uG87eCmc29JT4OImSQ"
-YOOKASSA_RETURN_URL = "http://localhost:5173/payment/success"
