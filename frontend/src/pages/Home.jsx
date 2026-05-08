@@ -28,7 +28,11 @@ function Home() {
     <div className="min-h-screen bg-[#111827] text-[#e5e7eb]">
 
       
+<<<<<<< HEAD
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 grid grid-cols-1 lg:grid-cols-4 gap-6">
+=======
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 lg:grid-cols-4 gap-6">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
         
         <div className="bg-[#243040] rounded-lg p-5 text-sm text-[#e5e7eb] space-y-3">
@@ -130,7 +134,11 @@ function Home() {
       </div>
 
       
+<<<<<<< HEAD
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14">
+=======
       <div className="max-w-7xl mx-auto px-6 pb-14">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
         <h2 className="text-center text-lg font-medium mb-7">
           Популярные автомобили
         </h2>
@@ -143,9 +151,15 @@ function Home() {
               className="bg-[#1f2933] rounded-lg overflow-hidden cursor-pointer hover:translate-y-[-4px] transition"
             >
               <img
+<<<<<<< HEAD
+                src={`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'}${car.image}`}
+                alt={`${car.brand} ${car.model}`}
+                className="h-44 sm:h-36 w-full object-cover"
+=======
                 src={`http://localhost:8000${car.image}`}
                 alt={`${car.brand} ${car.model}`}
                 className="h-36 w-full object-cover"
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
               />
 
               <div className="p-3">

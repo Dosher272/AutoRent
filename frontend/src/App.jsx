@@ -11,6 +11,10 @@ import About from './pages/About'
 import Contacts from './pages/Contacts'
 import Header from './components/Header'
 import AdminBookings from './pages/AdminBookings'
+<<<<<<< HEAD
+import Payment from './pages/Payment'
+=======
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
 function App() {
   return (
@@ -22,6 +26,10 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/cars/:id" element={<CarPage />} />
         <Route path="/booking/:id" element={<Booking />} />
+<<<<<<< HEAD
+        <Route path="/payment/:bookingId" element={<Payment />} />
+=======
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 

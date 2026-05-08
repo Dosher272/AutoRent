@@ -1,0 +1,70 @@
+# Команды для запуска AutoRent на VPS Ubuntu
+# Везде замени IP_ТВОЕГО_СЕРВЕРА и пароли на свои значения.
+
+# 1. Обновление сервера
+apt update && apt upgrade -y
+
+# 2. Установка пакетов
+apt install python3 python3-pip python3-venv nginx git postgresql postgresql-contrib nodejs npm -y
+
+# 3. Клонирование проекта
+cd /var/www
+git clone https://github.com/Dosher272/AutoRent.git
+cd /var/www/AutoRent
+
+# 4. Виртуальное окружение Python
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 5. База данных PostgreSQL
+sudo -u postgres psql
+
+# Внутри psql выполнить:
+CREATE DATABASE autorent_db;
+CREATE USER autorent_user WITH PASSWORD 'ЗАМЕНИ_НА_ПАРОЛЬ_БАЗЫ';
+ALTER ROLE autorent_user SET client_encoding TO 'utf8';
+ALTER ROLE autorent_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE autorent_user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE autorent_db TO autorent_user;
+\q
+
+# 6. Копирование service-файла
+cp /var/www/AutoRent/deploy/autorent.service /etc/systemd/system/autorent.service
+nano /etc/systemd/system/autorent.service
+# В файле заменить IP_ТВОЕГО_СЕРВЕРА, DJANGO_SECRET_KEY и POSTGRES_PASSWORD.
+
+# 7. Миграции Django
+source /var/www/AutoRent/venv/bin/activate
+cd /var/www/AutoRent
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic --noinput
+python manage.py createsuperuser
+
+# 8. Запуск Gunicorn через systemd
+systemctl daemon-reload
+systemctl start autorent
+systemctl enable autorent
+systemctl status autorent
+
+# 9. Сборка React
+cd /var/www/AutoRent/frontend
+echo "VITE_BACKEND_URL=http://IP_ТВОЕГО_СЕРВЕРА" > .env
+npm install
+npm run build
+
+# 10. Nginx
+cp /var/www/AutoRent/deploy/nginx_autorent.conf /etc/nginx/sites-available/autorent
+nano /etc/nginx/sites-available/autorent
+# Заменить IP_ТВОЕГО_СЕРВЕРА.
+
+ln -s /etc/nginx/sites-available/autorent /etc/nginx/sites-enabled/autorent
+rm -f /etc/nginx/sites-enabled/default
+nginx -t
+systemctl restart nginx
+
+# 11. Открыть сайт
+# http://IP_ТВОЕГО_СЕРВЕРА
+# http://IP_ТВОЕГО_СЕРВЕРА/admin/

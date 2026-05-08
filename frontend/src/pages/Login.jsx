@@ -29,8 +29,13 @@ function Login() {
   }
 
   return (
+<<<<<<< HEAD
+    <div className="min-h-screen bg-[#111827] flex items-center justify-center px-4 sm:px-6">
+      <div className="w-full max-w-md bg-[#1f2933] rounded-xl p-5 sm:p-8">
+=======
     <div className="min-h-screen bg-[#111827] flex items-center justify-center px-6">
       <div className="w-full max-w-md bg-[#1f2933] rounded-xl p-8">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
         <h2 className="text-xl font-semibold text-[#e5e7eb] mb-6 text-center">
           Вход в аккаунт

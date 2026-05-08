@@ -2,7 +2,11 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import api from '../api/api'
 
+<<<<<<< HEAD
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
+=======
 const BACKEND_URL = 'http://localhost:8000'
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
 function Booking() {
   const { id } = useParams()
@@ -43,8 +47,13 @@ function Booking() {
       start_date: startDate,
       end_date: endDate,
     })
+<<<<<<< HEAD
+      .then((res) => {
+        navigate(`/payment/${res.data.id}`)
+=======
       .then(() => {
         navigate('/profile')
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
       })
       .catch(err => {
         setError(
@@ -64,8 +73,13 @@ function Booking() {
   }
 
   return (
+<<<<<<< HEAD
+    <div className="min-h-screen bg-[#111827] text-[#e5e7eb] px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
+      <div className="max-w-lg mx-auto bg-[#1f2933] rounded-xl overflow-hidden border border-[#374151]">
+=======
     <div className="min-h-screen bg-[#111827] text-[#e5e7eb] px-6 py-14">
       <div className="max-w-lg mx-auto bg-[#1f2933] rounded-xl overflow-hidden">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
         
         <img
@@ -75,10 +89,17 @@ function Booking() {
               : '/placeholder.jpg'
           }
           alt={`${car.brand} ${car.model}`}
+<<<<<<< HEAD
+          className="w-full h-48 sm:h-56 object-cover"
+        />
+
+        <div className="p-5 sm:p-7 space-y-6">
+=======
           className="w-full h-56 object-cover"
         />
 
         <div className="p-7 space-y-6">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
           
           <div>

@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background: #111827;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+=======
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b

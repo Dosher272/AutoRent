@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../api/api'
 
+<<<<<<< HEAD
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
+=======
 const BACKEND_URL = 'http://localhost:8000'
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
 function CarPage() {
   const { id } = useParams()
@@ -32,7 +36,11 @@ function CarPage() {
   }
 
   return (
+<<<<<<< HEAD
+    <div className="min-h-screen bg-[#111827] text-[#e5e7eb] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+=======
     <div className="min-h-screen bg-[#111827] text-[#e5e7eb] px-6 py-10">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
       <div className="max-w-5xl mx-auto">
 
         <Link
@@ -52,12 +60,21 @@ function CarPage() {
                 : '/placeholder.jpg'
             }
             alt={`${car.brand} ${car.model}`}
+<<<<<<< HEAD
+            className="w-full h-56 sm:h-80 object-cover"
+          />
+
+          <div className="p-5 sm:p-7 space-y-4">
+
+            <h1 className="text-xl sm:text-2xl font-semibold">
+=======
             className="w-full h-80 object-cover"
           />
 
           <div className="p-7 space-y-4">
 
             <h1 className="text-2xl font-semibold">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
               {car.brand} {car.model}
             </h1>
 
@@ -77,7 +94,11 @@ function CarPage() {
 
             <Link
               to={`/booking/${car.id}`}
+<<<<<<< HEAD
+              className="inline-block w-full sm:w-auto text-center bg-[#374151] hover:bg-[#4b5563] transition px-6 py-3 rounded-lg text-sm font-medium"
+=======
               className="inline-block bg-[#374151] hover:bg-[#4b5563] transition px-6 py-3 rounded-lg text-sm font-medium"
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
             >
               Забронировать
             </Link>

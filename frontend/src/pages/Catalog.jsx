@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import api from '../api/api'
 
+<<<<<<< HEAD
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
+=======
 const BACKEND_URL = 'http://localhost:8000'
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
 function Catalog() {
   const [cars, setCars] = useState([])
@@ -10,10 +14,20 @@ function Catalog() {
 
   const [carClass, setCarClass] = useState('')
   const [transmission, setTransmission] = useState('')
+<<<<<<< HEAD
+  const [priceFrom, setPriceFrom] = useState('')
+  const [priceTo, setPriceTo] = useState('')
+  const [sort, setSort] = useState('')
+  const [onlyAvailable, setOnlyAvailable] = useState(false)
+
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+=======
   const [priceTo, setPriceTo] = useState('')
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
   const loadCars = (params = {}) => {
     setLoading(true)
@@ -26,15 +40,69 @@ function Catalog() {
   useEffect(() => {
     const classFromUrl = searchParams.get('car_class')
     const transmissionFromUrl = searchParams.get('transmission')
+<<<<<<< HEAD
+    const minPriceFromUrl = searchParams.get('min_price')
+    const maxPriceFromUrl = searchParams.get('max_price')
+    const sortFromUrl = searchParams.get('sort')
+    const statusFromUrl = searchParams.get('status')
+
+    if (classFromUrl) setCarClass(classFromUrl)
+    if (transmissionFromUrl) setTransmission(transmissionFromUrl)
+    if (minPriceFromUrl) setPriceFrom(minPriceFromUrl)
+    if (maxPriceFromUrl) setPriceTo(maxPriceFromUrl)
+    if (sortFromUrl) setSort(sortFromUrl)
+    if (statusFromUrl === 'available') setOnlyAvailable(true)
+=======
     const priceFromUrl = searchParams.get('max_price')
 
     if (classFromUrl) setCarClass(classFromUrl)
     if (transmissionFromUrl) setTransmission(transmissionFromUrl)
     if (priceFromUrl) setPriceTo(priceFromUrl)
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 
     loadCars({
       car_class: classFromUrl || undefined,
       transmission: transmissionFromUrl || undefined,
+<<<<<<< HEAD
+      min_price: minPriceFromUrl || undefined,
+      max_price: maxPriceFromUrl || undefined,
+      sort: sortFromUrl || undefined,
+      status: statusFromUrl || undefined,
+    })
+  }, [])
+
+  const handleApplyFilters = () => {
+    const params = {}
+
+    if (carClass) params.car_class = carClass
+    if (transmission) params.transmission = transmission
+    if (priceFrom) params.min_price = priceFrom
+    if (priceTo) params.max_price = priceTo
+    if (sort) params.sort = sort
+    if (onlyAvailable) params.status = 'available'
+
+    setSearchParams(params)
+    loadCars(params)
+  }
+
+  const handleResetFilters = () => {
+    setCarClass('')
+    setTransmission('')
+    setPriceFrom('')
+    setPriceTo('')
+    setSort('')
+    setOnlyAvailable(false)
+    setSearchParams({})
+    loadCars({})
+  }
+
+  return (
+    <div className="min-h-screen bg-[#111827] text-[#e5e7eb]">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+        
+        <div className="bg-[#1f2933] rounded-xl p-5 sm:p-7 space-y-5">
+=======
       max_price: priceFromUrl || undefined,
     })
   }, [])
@@ -45,6 +113,7 @@ function Catalog() {
 
         
         <div className="bg-[#1f2933] rounded-xl p-7 space-y-5">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
           <h3 className="text-sm font-medium">Фильтры</h3>
 
           <select
@@ -70,12 +139,51 @@ function Catalog() {
 
           <input
             type="number"
+<<<<<<< HEAD
+            min="0"
+            placeholder="Цена от, ₽"
+            value={priceFrom}
+            onChange={e => setPriceFrom(e.target.value)}
+            className="w-full bg-[#111827] border border-[#374151] rounded-lg px-4 py-3 text-sm"
+          />
+
+          <input
+            type="number"
+            min="0"
+=======
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
             placeholder="Цена до, ₽"
             value={priceTo}
             onChange={e => setPriceTo(e.target.value)}
             className="w-full bg-[#111827] border border-[#374151] rounded-lg px-4 py-3 text-sm"
           />
 
+<<<<<<< HEAD
+          <select
+            value={sort}
+            onChange={e => setSort(e.target.value)}
+            className="w-full bg-[#111827] border border-[#374151] rounded-lg px-4 py-3 text-sm"
+          >
+            <option value="" hidden>Сортировка</option>
+            <option value="price_asc">Цена по возрастанию</option>
+            <option value="price_desc">Цена по убыванию</option>
+            <option value="year_desc">Год (сначала новые)</option>
+            <option value="year_asc">Год (сначала старые)</option>
+          </select>
+
+          <label className="flex items-center gap-3 text-xs text-[#9ca3af]">
+            <input
+              type="checkbox"
+              checked={onlyAvailable}
+              onChange={e => setOnlyAvailable(e.target.checked)}
+              className="h-4 w-4 rounded border border-[#374151] bg-[#111827]"
+            />
+            Только доступные авто
+          </label>
+
+          <button
+            onClick={handleApplyFilters}
+=======
           <button
             onClick={() =>
               loadCars({
@@ -84,10 +192,21 @@ function Catalog() {
                 max_price: priceTo || undefined,
               })
             }
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
             className="w-full bg-[#374151] hover:bg-[#4b5563] transition py-3 rounded-lg text-sm font-medium"
           >
             Применить
           </button>
+<<<<<<< HEAD
+
+          <button
+            onClick={handleResetFilters}
+            className="w-full border border-[#374151] hover:border-[#4b5563] transition py-3 rounded-lg text-sm font-medium"
+          >
+            Сбросить
+          </button>
+=======
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
         </div>
 
         
@@ -95,7 +214,11 @@ function Catalog() {
           {loading ? (
             <p className="text-sm text-[#9ca3af]">Загрузка...</p>
           ) : (
+<<<<<<< HEAD
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-8">
+=======
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
               {cars.map(car => (
                 <div
                   key={car.id}
@@ -105,10 +228,17 @@ function Catalog() {
                   <img
                     src={car.image ? `${BACKEND_URL}${car.image}` : '/placeholder.jpg'}
                     alt={`${car.brand} ${car.model}`}
+<<<<<<< HEAD
+                    className="h-44 sm:h-52 w-full object-cover"
+                  />
+
+                  <div className="p-4 sm:p-5 space-y-1">
+=======
                     className="h-52 w-full object-cover"
                   />
 
                   <div className="p-5 space-y-1">
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
                     <h3 className="text-sm font-medium">
                       {car.brand} {car.model}
                     </h3>

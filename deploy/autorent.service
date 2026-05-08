@@ -1,0 +1,23 @@
+[Unit]
+Description=AutoRent Django Gunicorn
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/AutoRent
+Environment="PATH=/var/www/AutoRent/venv/bin"
+Environment="DJANGO_DEBUG=False"
+Environment="DJANGO_SECRET_KEY=ЗАМЕНИ_НА_СЛОЖНЫЙ_КЛЮЧ"
+Environment="DJANGO_ALLOWED_HOSTS=IP_ТВОЕГО_СЕРВЕРА,localhost,127.0.0.1"
+Environment="CORS_ALLOWED_ORIGINS=http://IP_ТВОЕГО_СЕРВЕРА"
+Environment="CSRF_TRUSTED_ORIGINS=http://IP_ТВОЕГО_СЕРВЕРА"
+Environment="POSTGRES_DB=autorent_db"
+Environment="POSTGRES_USER=autorent_user"
+Environment="POSTGRES_PASSWORD=ЗАМЕНИ_НА_ПАРОЛЬ_БАЗЫ"
+Environment="POSTGRES_HOST=localhost"
+Environment="POSTGRES_PORT=5432"
+ExecStart=/var/www/AutoRent/venv/bin/gunicorn --workers 3 --bind unix:/var/www/AutoRent/autorent.sock autorent.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

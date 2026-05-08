@@ -9,7 +9,13 @@ urlpatterns = [
     path('api/cars/', include('cars.urls')),
     path('api/users/', include('users.urls')),
     path('api/bookings/', include('bookings.urls')),
+<<<<<<< HEAD
+    path('api/payments/', include('payments.urls')),
 ]
+
+=======
+]
+>>>>>>> d5dffd4b4b2fb4c57af278d9e50c14d89e24127b
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
